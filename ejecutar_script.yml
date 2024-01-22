@@ -1,0 +1,27 @@
+name: Ejecutar Script Automáticamente
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  ejecutar-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del Repositorio
+        uses: actions/checkout@v2
+
+      - name: Configurar Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.10  # Reemplaza con la versión de Python que necesitas
+
+      - name: Instalar Dependencias
+        run: |
+          pip install -r requirements.txt  # Si tienes un archivo de requisitos
+
+      - name: Ejecutar Script
+        run: |
+          jupyter nbconvert --execute auto_prec_gli.ipynb
